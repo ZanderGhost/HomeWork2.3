@@ -1,0 +1,47 @@
+# -*- coding: UTF-8 -*-
+
+import codecs
+import json
+
+def read_file ():
+	with codecs.open('newsfr.json', encoding="iso8859_5") as news:
+		dict_news = json.load(news)
+
+		return dict_news
+			
+def get_news_list ():
+	dict_news = read_file()
+	rss_list = dict_news['rss']['channel']['item']
+	news_list = []
+	for dict_news in rss_list:
+		news_list.append(dict_news['description']['__cdata'])
+	list_word = ''.join(news_list).split(' ')
+	return list_word
+
+def select_word():
+	list_word = get_news_list()
+	list_select_word = []
+	for word in list_word:
+		if len(word) >= 6:
+			list_select_word.append(word)
+	return list_select_word
+
+def sort_list():
+	list_word = select_word()
+	list_count_word = []
+	for word in list_word:	
+		check_word = word
+		dict_word = {}
+		for i in list_word:
+			count = 1
+			if check_word == i:
+				count += 1
+		dict_word[check_word] = count
+		list_count_word.append(dict_word)
+	print(list_count_word)
+
+
+sort_list()
+
+	
+
