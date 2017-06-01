@@ -19,7 +19,10 @@ def get_news_list (dict_news):
 	rss_list = dict_news['rss']['channel']['item']
 	news_list = []
 	for dict_n in rss_list:
-		news_list.append(dict_n['description']['__cdata'])
+		if '__cdata' in dict_n['description']:
+			news_list.append(dict_n['description']['__cdata'])
+		else:
+			news_list.append(dict_n['description'])
 	list_word = ''.join(news_list).split(' ')
 	return list_word
 
@@ -27,7 +30,7 @@ def select_word(list_word):
 	list_select_word = []
 	for word in list_word:
 		if len(word) >= 6:
-			list_select_word.append(word)
+			list_select_word.append(word.strip())
 	return list_select_word
 
 def get_count_word(list_word):
@@ -39,8 +42,7 @@ def get_count_word(list_word):
 			dict_word[item] += 1
 	return dict_word
 
-def sort_dict():
-	dict_word_sort = get_count_word()
+def sort_dict(dict_word_sort):
 	list_word_sort = []
 	l = lambda i: i[1]
 	list_word_sort = sorted(dict_word_sort.items(), key=l, reverse=True )
@@ -57,7 +59,8 @@ def main():
 		all_word_list.extend(list_select_word)
 	dict_word = get_count_word(all_word_list)
 	list_sort = sort_dict(dict_word)
-	print(list_sort[:9])
+	for item  in list_sort[:10]:
+		print('"{}" - упоминается {} раз'.format(item[0], item[1]))
 
 main()
 
