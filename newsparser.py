@@ -18,7 +18,6 @@ def read_file (file_name):
 def get_news_list (dict_news):
 	rss_list = dict_news['rss']['channel']['item']
 	news_list = []
-	print(rss_list)
 	for dict_news in rss_list:
 		news_list.append(dict_news['description']['__cdata'])
 	list_word = ''.join(news_list).split(' ')
