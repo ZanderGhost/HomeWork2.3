@@ -28,18 +28,13 @@ def select_word():
 
 def sort_list():
 	list_word = select_word()
-	list_count_word = []
-	for word in list_word:	
-		check_word = word
-		dict_word = {}
-		for i in list_word:
-			count = 1
-			if check_word == i:
-				count += 1
-		dict_word[check_word] = count
-		list_count_word.append(dict_word)
-	print(list_count_word)
-
+	dict_word = {}
+	for item in list_word:
+		if item not in dict_word.keys():
+			dict_word[item] = 1
+		else:
+			dict_word[item] += 1
+	print(dict_word)
 
 sort_list()
 
