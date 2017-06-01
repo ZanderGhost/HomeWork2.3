@@ -26,7 +26,7 @@ def select_word():
 			list_select_word.append(word)
 	return list_select_word
 
-def sort_list():
+def get_count_word():
 	list_word = select_word()
 	dict_word = {}
 	for item in list_word:
@@ -34,9 +34,16 @@ def sort_list():
 			dict_word[item] = 1
 		else:
 			dict_word[item] += 1
-	print(dict_word)
+	return dict_word
 
-sort_list()
+def sort_dict():
+	dict_word_sort = get_count_word()
+	l = lambda i: i[1]
+	print(sorted(dict_word_sort.items(), key=l, reverse=True ))
+
+sort_dict()
+
+
 
 	
 
