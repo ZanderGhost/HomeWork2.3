@@ -23,14 +23,14 @@ def get_news_list (dict_news):
 			news_list.append(dict_n['description']['__cdata'])
 		else:
 			news_list.append(dict_n['description'])
-	list_word = ''.join(news_list).split(' ')
+	list_word = ''.join(news_list).strip().split(' ')
 	return list_word
 
 def select_word(list_word):
 	list_select_word = []
 	for word in list_word:
 		if len(word) >= 6:
-			list_select_word.append(word.strip())
+			list_select_word.append(word)
 	return list_select_word
 
 def get_count_word(list_word):
