@@ -2,12 +2,19 @@
 
 import codecs
 import json
+import chardet
 
-def read_file ():
-	with codecs.open('newsfr.json', encoding="iso8859_5") as news:
+
+
+def read_file (file_name):
+	with open(file_name, 'rb') as f:
+		data = f.read()
+		result = chardet.detect(data)
+	with codecs.open(file_name, encoding=result['encoding']) as news:
 		dict_news = json.load(news)
-
 		return dict_news
+
+read_file('newsafr.json')
 			
 def get_news_list ():
 	dict_news = read_file()
@@ -38,10 +45,11 @@ def get_count_word():
 
 def sort_dict():
 	dict_word_sort = get_count_word()
+	list_word_sort = []
 	l = lambda i: i[1]
-	print(sorted(dict_word_sort.items(), key=l, reverse=True ))
+	list_word_sort = sorted(dict_word_sort.items(), key=l, reverse=True )
+	return list_word_sort
 
-sort_dict()
 
 
 
