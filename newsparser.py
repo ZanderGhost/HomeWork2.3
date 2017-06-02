@@ -3,6 +3,7 @@
 import codecs
 import json
 import chardet
+import re
 
 
 
@@ -23,7 +24,8 @@ def get_news_list (dict_news):
 			news_list.append(dict_n['description']['__cdata'])
 		else:
 			news_list.append(dict_n['description'])
-	list_word = ''.join(news_list).strip().split(' ')
+	string_world = re.sub(r'</?a.*?>', '', ''.join(news_list))
+	list_word = re.findall(r'[^,.\/ ]\w+', string_world)
 	return list_word
 
 def select_word(list_word):
