@@ -24,7 +24,7 @@ def get_news_list (dict_news):
 			news_list.append(dict_n['description']['__cdata'])
 		else:
 			news_list.append(dict_n['description'])
-	string_world = re.sub(r'</?a.*?>', '', ''.join(news_list))
+	string_world = re.sub(r'</?a.*?>', '', ' '.join(news_list))
 	list_word = re.findall(r'[^,.\/ ]\w+', string_world)
 	return list_word
 
