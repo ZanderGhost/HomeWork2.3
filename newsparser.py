@@ -10,8 +10,9 @@ def read_file(file_name):
     with open(file_name, 'rb') as f:
         data = f.read()
         result = chardet.detect(data)
-    with codecs.open(file_name, encoding=result['encoding']) as news:
-        dict_news = json.load(news)
+        data = data.decode(encoding=result['encoding'])
+        dict_news = json.loads(data)
+        assert isinstance(dict_news, object)
         return dict_news
 
 
