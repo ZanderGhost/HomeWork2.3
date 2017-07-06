@@ -44,8 +44,7 @@ def get_count_word(list_word):
 
 
 def sort_dict(dict_word_sort):
-    l = lambda i: i[1]
-    return sorted(dict_word_sort.items(), key=l, reverse=True)
+    return sorted(dict_word_sort.items(), key=lambda i: i[1], reverse=True)
 
 
 def main():
